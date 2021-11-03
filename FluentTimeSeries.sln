@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTimeSeries", "src\Flu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTimeSeries.Tests", "src\FluentTimeSeries.Tests\FluentTimeSeries.Tests.csproj", "{063F4FBE-5792-42D3-8823-E267D219F936}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTimeSeries.Demo", "src\FluentTimeSeries.Demo\FluentTimeSeries.Demo.csproj", "{3C5C3621-6101-4F3B-BBE1-2605F26C0635}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,9 +48,22 @@ Global
 		{063F4FBE-5792-42D3-8823-E267D219F936}.Release|x64.Build.0 = Release|Any CPU
 		{063F4FBE-5792-42D3-8823-E267D219F936}.Release|x86.ActiveCfg = Release|Any CPU
 		{063F4FBE-5792-42D3-8823-E267D219F936}.Release|x86.Build.0 = Release|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Debug|x64.Build.0 = Debug|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Debug|x86.Build.0 = Debug|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|x64.ActiveCfg = Release|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|x64.Build.0 = Release|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{76D53218-6088-49BD-84C4-70F20BB300F6} = {FF7AE5AD-FE63-4BE8-86C4-ADDAAC72F336}
 		{063F4FBE-5792-42D3-8823-E267D219F936} = {FF7AE5AD-FE63-4BE8-86C4-ADDAAC72F336}
+		{3C5C3621-6101-4F3B-BBE1-2605F26C0635} = {FF7AE5AD-FE63-4BE8-86C4-ADDAAC72F336}
 	EndGlobalSection
 EndGlobal
