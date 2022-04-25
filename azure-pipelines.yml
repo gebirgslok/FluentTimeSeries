@@ -34,6 +34,12 @@ steps:
       filePath: '$(System.DefaultWorkingDirectory)\ci\update-build-number-from-version.ps1'
       arguments: '-PathToCsprojFile $(System.DefaultWorkingDirectory)\FluentTimeSeries\FluentTimeSeries.csproj'
 
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'test'
+      projects: '**/*Tests.csproj'
+      testRunTitle: 'Unit Tests'
+
   - task: CopyFiles@2
     displayName: Copy Bin To ArtifactsStagingDirectory
     inputs:
