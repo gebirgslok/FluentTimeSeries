@@ -4,7 +4,7 @@ namespace FluentTimeSeries;
 
 public class TimeOrigin
 {
-    private readonly DateTime _dateTime;
+    public DateTime DateTime { get; }
 
     public static TimeOrigin Now => new(DateTime.Now);
 
@@ -22,13 +22,13 @@ public class TimeOrigin
 
     private TimeOrigin(DateTime dateTime)
     {
-        _dateTime = dateTime;
+        DateTime = dateTime;
     }
 
-    internal TimeSpan ToRelativeTimestamp(DateTime absoluteTimestamp)
+    internal TimeSpan ToOriginOffset(DateTime absoluteTimestamp)
     {
-        return absoluteTimestamp - _dateTime;
+        return absoluteTimestamp - DateTime;
     }
 
-    internal DateTime Add(TimeSpan value) => _dateTime.Add(value);
+    internal DateTime Add(TimeSpan value) => DateTime.Add(value);
 }

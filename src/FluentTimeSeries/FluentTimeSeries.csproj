@@ -1,9 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard1.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<LangVersion>10.0</LangVersion>
-	</PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+
+    <!-- version numbers will be updated by build -->
+    <Version>0.1.0</Version>
+    <FileVersion>0.1.0.0</FileVersion>
+    <InformationalVersion>0.1.0.0</InformationalVersion>
+    <PackageVersion>0.1.0</PackageVersion>
+    <Authors>Jens Eisenbach</Authors>
+    <Product>FluentTimeSeries</Product>
+    <Description>TBD</Description>
+    <Copyright>Copyright © Jens Eisenbach 2022</Copyright>
+    <Summary>TBD</Summary>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Title>FluentTimeSeries</Title>
+    <PackageId>FluentTimeSeries</PackageId>
+    <PackageTags>TimeSeries;SignalGenerator;Fluent-API;Sensors;IoT;Mocking;Testing;Prototyping</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RootNamespace>FluentTimeSeries</RootNamespace>
+    <AssemblyName>FluentTimeSeries</AssemblyName>
+    <RepositoryUrl>https://github.com/gebirgslok/FluentTimeSeries</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <AssemblyTitle>BricklinkSharp .Net Standard 2.0</AssemblyTitle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+    <AssemblyTitle>BricklinkSharp .Net Core 3.0</AssemblyTitle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <AssemblyTitle>BricklinkSharp .Net Core 3.1</AssemblyTitle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net5.0'">
+    <AssemblyTitle>BricklinkSharp .Net 5.0</AssemblyTitle>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <AssemblyTitle>BricklinkSharp .Net 6.0</AssemblyTitle>
+  </PropertyGroup>
 
 </Project>

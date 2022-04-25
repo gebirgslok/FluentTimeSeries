@@ -6,7 +6,7 @@ namespace FluentTimeSeries;
 public static partial class TimeSeriesBuilderExtensions
 {
     public static IValueGeneratorSelectionStage GaussianRandom(this ITimeSeriesSelectionStage stage,
-        double mean = 0.0, double stdDev = 1.0)
+        double mean, double stdDev)
     {
         var p = new GaussianRandomConfiguration
         {

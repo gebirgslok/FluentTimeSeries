@@ -62,7 +62,7 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
 
     public IValueGeneratorSelectionStage SetFn(IFt fx)
     {
-        if ((_currentAllowedActions & AllowedTimeSeriesBuilderActions.SetFn) != 0)
+        if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetFn))
         {
             throw new Exception("Invalid!");
             //Invalid!
@@ -98,7 +98,7 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
 
     public IValueGeneratorSelectionStage SetTransformer(ITimeSeriesTransformer transformer)
     {
-        if ((_currentAllowedActions & AllowedTimeSeriesBuilderActions.SetTransformer) != 0)
+        if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetTransformer))
         {
             //Invalid!
             throw new Exception("LOL Fail");
@@ -119,7 +119,7 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
 
     public ITimeSeriesSelectionStage SetAggregator(ITimeSeriesAggregator aggregator)
     {
-        if ((_currentAllowedActions & AllowedTimeSeriesBuilderActions.SetAggregator) != 0)
+        if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetAggregator))
         {
             //Invalid!
         }
@@ -139,7 +139,7 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
             //TODO this is invalid!
         }
 
-        if ((_currentAllowedActions & AllowedTimeSeriesBuilderActions.SetTimeOrigin) != 0)
+        if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetTimeOrigin))
         {
             //TODO Invalid!
         }

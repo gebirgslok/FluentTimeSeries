@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FF7AE5AD-FE63-4BE8-86C4-ADDAAC72F336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTimeSeries", "src\FluentTimeSeries\FluentTimeSeries.csproj", "{76D53218-6088-49BD-84C4-70F20BB300F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentTimeSeries", "src\FluentTimeSeries\FluentTimeSeries.csproj", "{76D53218-6088-49BD-84C4-70F20BB300F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTimeSeries.Tests", "src\FluentTimeSeries.Tests\FluentTimeSeries.Tests.csproj", "{063F4FBE-5792-42D3-8823-E267D219F936}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentTimeSeries.Tests", "test\FluentTimeSeries.Tests\FluentTimeSeries.Tests.csproj", "{063F4FBE-5792-42D3-8823-E267D219F936}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentTimeSeries.Demo", "src\FluentTimeSeries.Demo\FluentTimeSeries.Demo.csproj", "{3C5C3621-6101-4F3B-BBE1-2605F26C0635}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentTimeSeries.Demo", "src\FluentTimeSeries.Demo\FluentTimeSeries.Demo.csproj", "{3C5C3621-6101-4F3B-BBE1-2605F26C0635}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D9B70A34-C9C9-4318-B976-AFC0724FA939}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{76D53218-6088-49BD-84C4-70F20BB300F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -61,9 +60,15 @@ Global
 		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|x86.ActiveCfg = Release|Any CPU
 		{3C5C3621-6101-4F3B-BBE1-2605F26C0635}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{76D53218-6088-49BD-84C4-70F20BB300F6} = {FF7AE5AD-FE63-4BE8-86C4-ADDAAC72F336}
-		{063F4FBE-5792-42D3-8823-E267D219F936} = {FF7AE5AD-FE63-4BE8-86C4-ADDAAC72F336}
+		{063F4FBE-5792-42D3-8823-E267D219F936} = {D9B70A34-C9C9-4318-B976-AFC0724FA939}
 		{3C5C3621-6101-4F3B-BBE1-2605F26C0635} = {FF7AE5AD-FE63-4BE8-86C4-ADDAAC72F336}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E32EF82A-C9E3-4F1D-99C0-3C1B5994F535}
 	EndGlobalSection
 EndGlobal
