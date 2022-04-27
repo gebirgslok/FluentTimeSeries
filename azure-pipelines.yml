@@ -11,6 +11,7 @@ variables:
   buildPlatform: "Any CPU"
   buildConfiguration: "Release"
   semVerDate: $(Get-Date -Format yyyyMMdd+HHmmss)
+  srcDirectory: "$(System.DefaultWorkingDirectory)/src"
 
 steps:
   - task: NuGetToolInstaller@1
@@ -25,14 +26,14 @@ steps:
   - task: PowerShell@2
     displayName: Update CSPROJ Files
     inputs:
-      filePath: '$(System.DefaultWorkingDirectory)\ci\update-csproj-versions.ps1'
+      filePath: '$(System.DefaultWorkingDirectory)/ci/update-csproj-versions.ps1'
       arguments: '-SrcDirectory $(System.DefaultWorkingDirectory) -BuildId $(Build.BuildId) -InformationalVersionSuffix "$(semVerDate)"'
 
   - task: PowerShell@2
     displayName: Update Build Number From Version
     inputs:
-      filePath: '$(System.DefaultWorkingDirectory)\ci\update-build-number-from-version.ps1'
-      arguments: '-PathToCsprojFile $(System.DefaultWorkingDirectory)\FluentTimeSeries\FluentTimeSeries.csproj'
+      filePath: '$(System.DefaultWorkingDirectory)/ci/update-build-number-from-version.ps1'
+      arguments: '-PathToCsprojFile $(srcDirectory)/FluentTimeSeries/FluentTimeSeries.csproj'
 
   - task: DotNetCoreCLI@2
     inputs:
