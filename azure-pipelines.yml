@@ -26,27 +26,35 @@ steps:
   - task: PowerShell@2
     displayName: Update CSPROJ Files
     inputs:
-      filePath: '$(System.DefaultWorkingDirectory)/ci/update-csproj-versions.ps1'
+      filePath: "$(System.DefaultWorkingDirectory)/ci/update-csproj-versions.ps1"
       arguments: '-SrcDirectory $(System.DefaultWorkingDirectory) -BuildId $(Build.BuildId) -InformationalVersionSuffix "$(semVerDate)"'
 
   - task: PowerShell@2
     displayName: Update Build Number From Version
     inputs:
-      filePath: '$(System.DefaultWorkingDirectory)/ci/update-build-number-from-version.ps1'
-      arguments: '-PathToCsprojFile $(srcDirectory)/FluentTimeSeries/FluentTimeSeries.csproj'
+      filePath: "$(System.DefaultWorkingDirectory)/ci/update-build-number-from-version.ps1"
+      arguments: "-PathToCsprojFile $(srcDirectory)/FluentTimeSeries/FluentTimeSeries.csproj"
 
   - task: DotNetCoreCLI@2
     displayName: Run Unit Tests
     inputs:
-      command: 'test'
-      projects: '**/*Tests.csproj'
-      testRunTitle: 'Unit Tests'
+      command: "test"
+      projects: "**/*Tests.csproj"
+      testRunTitle: "Unit Tests"
+
+  - task: DotNetCoreCLI@2
+    displayName: Build Solution and create NuGet package
+    inputs:
+      command: "pack"
+      packagesToPack: "$(srcDirectory)/FluentTimeSeries/FluentTimeSeries.csproj"
+      versioningScheme: "off"
+      packDirectory: $(srcDirectory)/FluentTimeSeries/bin/$(buildConfiguration)
 
   - task: CopyFiles@2
     displayName: Copy Bin To ArtifactsStagingDirectory
     inputs:
       SourceFolder: "$(System.DefaultWorkingDirectory)"
-      Contents: FluentTimeSeries\bin\$(BuildConfiguration)\**
+      Contents: FluentTimeSeries/bin/$(BuildConfiguration)/**
       TargetFolder: "$(Build.ArtifactsStagingDirectory)"
 
   - task: PublishBuildArtifacts@1

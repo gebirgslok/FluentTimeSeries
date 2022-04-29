@@ -14,12 +14,16 @@ internal static class Example1
     {
         var series = TimeSeriesBuilder
             .New().Square()
-            //.Add().Cosine()
+            .Add().Sine()
+            .Subtract().Sawtooth(config =>
+            {
+                config.Period = TimeSpan.FromSeconds(3);
+            })
             .Add().GaussianRandom(0, 0.1)
             .SetTimeOrigin(TimeOrigin.Now)
             .Build();
 
-        var block = series.Block(100, 1.0 / 50);
+        var block = series.Block(200, 1.0 / 50);
 
         var cartesianChart = new SKCartesianChart
         {

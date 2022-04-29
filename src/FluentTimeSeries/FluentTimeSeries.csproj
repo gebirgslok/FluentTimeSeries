@@ -11,13 +11,13 @@
     <PackageVersion>0.1.0</PackageVersion>
     <Authors>Jens Eisenbach</Authors>
     <Product>FluentTimeSeries</Product>
-    <Description>TBD</Description>
+    <Description>Fluent-API-library to compose and generate complex time series.</Description>
     <Copyright>Copyright © Jens Eisenbach 2022</Copyright>
-    <Summary>TBD</Summary>
+    <Summary>Fluent-API-library to compose and generate complex time series.</Summary>
     <NeutralLanguage>en-US</NeutralLanguage>
     <Title>FluentTimeSeries</Title>
     <PackageId>FluentTimeSeries</PackageId>
-    <PackageTags>TimeSeries;SignalGenerator;Fluent-API;Sensors;IoT;Mocking;Testing;Prototyping</PackageTags>
+    <PackageTags>TimeSeries;SignalGenerator;Fluent-API;Sensors;IoT;Mocking;Testing;Prototyping;UI-MockUps;Sensors</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RootNamespace>FluentTimeSeries</RootNamespace>
     <AssemblyName>FluentTimeSeries</AssemblyName>
