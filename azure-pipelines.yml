@@ -41,6 +41,7 @@ steps:
       command: "test"
       projects: "**/*Tests.csproj"
       testRunTitle: "Unit Tests"
+      configuration: $(buildConfiguration)
 
   - task: DotNetCoreCLI@2
     displayName: Build Solution and create NuGet package
@@ -53,9 +54,8 @@ steps:
   - task: CopyFiles@2
     displayName: Copy Bin To ArtifactsStagingDirectory
     inputs:
-      SourceFolder: "$(srcDirectory)/FluentTimeSeries/bin/"
+      SourceFolder: "$(srcDirectory)/FluentTimeSeries/bin/$(buildConfiguration)"
       Contents: "**"
-      TargetFolder: "$(Build.ArtifactsStagingDirectory)"
 
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifacts
