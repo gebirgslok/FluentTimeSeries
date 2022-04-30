@@ -56,6 +56,7 @@ steps:
     inputs:
       SourceFolder: "$(srcDirectory)/FluentTimeSeries/bin/$(buildConfiguration)"
       Contents: "**"
+      targetFolder: $(Build.ArtifactStagingDirectory)
 
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifacts
