@@ -5,6 +5,12 @@ namespace FluentTimeSeries;
 
 public static partial class TimeSeriesBuilderExtensions
 {
+    public static IValueGeneratorSelectionStage MultiplyBy(this IValueGeneratorSelectionStage stage,
+        double factor)
+    {
+        return stage.SetTransformer(new MultiplyBy(factor));
+    }
+
     public static IValueGeneratorSelectionStage Pow(this IValueGeneratorSelectionStage stage, 
         double exponent = 2.0)
     {

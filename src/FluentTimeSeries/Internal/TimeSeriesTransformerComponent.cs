@@ -11,5 +11,6 @@ internal class TimeSeriesTransformerComponent : ITimeSeriesComponent
 
     public void Next(ICurrentSampleContext context)
     {
+        context.SetNextValue(_transformer.Transform(context.CurrentValue));
     }
 }

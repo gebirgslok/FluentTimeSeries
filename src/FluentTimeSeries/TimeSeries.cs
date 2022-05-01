@@ -7,22 +7,22 @@ namespace FluentTimeSeries;
 
 public class TimeSeries
 {
-    private readonly ITimeSeriesComponent[] _elements;
+    internal ITimeSeriesComponent[] Components { get; }
 
     public TimeOrigin TimeOrigin { get; }
 
-    internal TimeSeries(IEnumerable<ITimeSeriesComponent> elements, 
+    internal TimeSeries(IEnumerable<ITimeSeriesComponent> components, 
         TimeOrigin? timeOrigin = null)
     {
-        TimeOrigin = timeOrigin ?? TimeOrigin.UtcNow;
-        _elements = elements.ToArray();
+        TimeOrigin = timeOrigin ?? TimeOrigin.Now;
+        Components = components.ToArray();
     }
 
     private DataPoint CalculateDataPoint(TimeSpan relativeTimestamp, DateTime absoluteTimestamp)
     {
         var context = new CurrentSampleContext(relativeTimestamp, absoluteTimestamp);
 
-        foreach (var timeSeriesElement in _elements)
+        foreach (var timeSeriesElement in Components)
         {
             timeSeriesElement.Next(context);
         }
@@ -54,14 +54,14 @@ public class TimeSeries
         return dataPoints;
     }
 
-    public DataPoint[] Block(TimeSpan length, double samplingInterval, DateTime? startTimestamp = null)
+    public DataPoint[] Block(TimeSpan length, double samplingIntervalSeconds, DateTime? startTimestamp = null)
     {
         throw new NotImplementedException();
     }
 
     public DataPoint Sample(DateTime? timestamp = null)
     {
-        var timestampOrNow = timestamp ?? DateTime.Now;
+        var timestampOrNow = timestamp ?? TimeOrigin.GetNow();
         var relativeTimestamp = TimeOrigin.ToOriginOffset(timestampOrNow);
         return CalculateDataPoint(relativeTimestamp, timestampOrNow);
     }

@@ -36,21 +36,35 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
         SetTimeOrigin = 0x08
     }
 
-    private readonly IList<ITimeSeriesComponent> _elements;
+    private readonly IList<ITimeSeriesComponent> _components;
     private IFt? _currentFn;
     private ITimeSeriesAggregator? _currentReducer;
     private AllowedTimeSeriesBuilderActions _currentAllowedActions;
     private TimeOrigin? _currentTimeOrigin;
     private bool _isInitialized;
 
+    public static IValueGeneratorSelectionStage FromTimeSeries(TimeSeries timeSeries, 
+        TimeOrigin? timeOrigin = null)
+    {
+        return new TimeSeriesBuilder(timeSeries, timeOrigin);
+    }
+
     public static ITimeSeriesSelectionStage New()
     {
         return new TimeSeriesBuilder();
     }
 
+    private TimeSeriesBuilder(TimeSeries timeSeries, TimeOrigin? timeOrigin)
+    {
+        _components = timeSeries.Components.ToList();
+        _currentTimeOrigin = timeOrigin ?? timeSeries.TimeOrigin;
+        _currentAllowedActions = AllowedTimeSeriesBuilderActions.SetAggregator 
+                                 | AllowedTimeSeriesBuilderActions.SetFn;
+    }
+
     private TimeSeriesBuilder()
     {
-        _elements = new List<ITimeSeriesComponent>();
+        _components = new List<ITimeSeriesComponent>();
         _currentAllowedActions = AllowedTimeSeriesBuilderActions.SetFn;
     }
 
@@ -78,13 +92,13 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
 
         if (!_isInitialized)
         {
-            _elements.Add(new FtProxyComponent(_currentFn));
+            _components.Add(new FtProxyComponent(_currentFn));
             _isInitialized = true;
         }
         else
         {
             var newElement = new TimeSeriesAggregatorComponent(_currentFn, _currentReducer!);
-            _elements.Add(newElement);
+            _components.Add(newElement);
         }
 
         ResetCurrentSelection();
@@ -105,7 +119,7 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
         }
 
         var newElement = new TimeSeriesTransformerComponent(transformer);
-        _elements.Add(newElement);
+        _components.Add(newElement);
 
         ResetCurrentSelection();
 
@@ -152,12 +166,12 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
 
     public TimeSeries Build()
     {
-        if (!_elements.Any())
+        if (!_components.Any())
         {
             //TODO real exception!
             throw new Exception("Invalid because no elements!");
         }
 
-        return new TimeSeries(_elements, _currentTimeOrigin);
+        return new TimeSeries(_components, _currentTimeOrigin);
     }
 }
