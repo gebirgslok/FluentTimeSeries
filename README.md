@@ -8,7 +8,7 @@
 FluentTimeSeries is a small utility library with a Fluent-API that allows you to design and utilize complex time series with just a few lines of code.
 ```csharp
 var series = TimeSeriesBuilder
-	.New().Sine()
+    .New().Sine()
     .Add().Cosine(config =>
     {
 	    config.Amplitude = 3.0;
