@@ -5,10 +5,10 @@
     <LangVersion>10.0</LangVersion>
 
     <!-- version numbers will be updated by build -->
-    <Version>0.1.0</Version>
-    <FileVersion>0.1.0.0</FileVersion>
-    <InformationalVersion>0.1.0.0</InformationalVersion>
-    <PackageVersion>0.1.0</PackageVersion>
+    <Version>0.2.0</Version>
+    <FileVersion>0.2.0.0</FileVersion>
+    <InformationalVersion>0.2.0.0</InformationalVersion>
+    <PackageVersion>0.2.0</PackageVersion>
     <Authors>Jens Eisenbach</Authors>
     <Product>FluentTimeSeries</Product>
     <Description>Fluent-API-library to compose and generate complex time series.</Description>

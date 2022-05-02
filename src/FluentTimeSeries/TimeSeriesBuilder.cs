@@ -114,7 +114,9 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
 
         //After setting a TimeSeries the user is only allowed to set either a transformer or a combiner.
         _currentAllowedActions =
-            AllowedTimeSeriesBuilderActions.SetTransformer | AllowedTimeSeriesBuilderActions.SetAggregator;
+            AllowedTimeSeriesBuilderActions.SetTransformer | 
+            AllowedTimeSeriesBuilderActions.SetAggregator |
+            AllowedTimeSeriesBuilderActions.SetTimeOrigin;
 
         return this;
     }
