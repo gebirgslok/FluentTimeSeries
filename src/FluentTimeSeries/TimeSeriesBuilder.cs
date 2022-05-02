@@ -68,6 +68,14 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
         _currentAllowedActions = AllowedTimeSeriesBuilderActions.SetFn;
     }
 
+    private static IEnumerable<Enum> GetFlags(Enum e)
+    {
+        return Enum
+            .GetValues(e.GetType())
+            .Cast<Enum>()
+            .Where(e.HasFlag);
+    }
+
     private void ResetCurrentSelection()
     {
         _currentFn = null;
@@ -78,8 +86,9 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
     {
         if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetFn))
         {
-            throw new Exception("Invalid!");
-            //Invalid!
+            throw new InvalidOperationException("Cannot set function at this configuration stage." +
+                                                Environment.NewLine +
+                                                $"Allowed actions: {string.Join(",", GetFlags(_currentAllowedActions))}.");
         }
 
         if (_isInitialized && _currentReducer == null)
@@ -114,8 +123,9 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
     {
         if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetTransformer))
         {
-            //Invalid!
-            throw new Exception("LOL Fail");
+            throw new InvalidOperationException($"Cannot set {nameof(transformer)} at this configuration stage." +
+                                                Environment.NewLine +
+                                                $"Allowed actions: {string.Join(",", GetFlags(_currentAllowedActions))}.");
         }
 
         var newElement = new TimeSeriesTransformerComponent(transformer);
@@ -135,7 +145,9 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
     {
         if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetAggregator))
         {
-            //Invalid!
+            throw new InvalidOperationException($"Cannot set {nameof(aggregator)} at this configuration stage." +
+                                                Environment.NewLine +
+                                                $"Allowed actions: {string.Join(",", GetFlags(_currentAllowedActions))}.");
         }
 
         _currentReducer = aggregator;
@@ -150,12 +162,19 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
     {
         if (_currentTimeOrigin != null)
         {
-            //TODO this is invalid!
+            throw new InvalidOperationException($"Cannot set {nameof(TimeOrigin)} because it is already set." +
+                                                Environment.NewLine +
+                                                $"Note that the {nameof(SetTimeOrigin)} method can only be" +
+                                                $"called when creating a new time series using the {nameof(New)} method." +
+                                                Environment.NewLine +
+                                                $"The time origin cannot be set after using {nameof(FromTimeSeries)}.");
         }
 
         if (!_currentAllowedActions.HasFlag(AllowedTimeSeriesBuilderActions.SetTimeOrigin))
         {
-            //TODO Invalid!
+            throw new InvalidOperationException($"Cannot set {nameof(timeOrigin)} at this configuration stage." +
+                                                Environment.NewLine +
+                                                $"Allowed actions: {string.Join(",", GetFlags(_currentAllowedActions))}.");
         }
 
         _currentTimeOrigin = timeOrigin;
@@ -168,8 +187,8 @@ public class TimeSeriesBuilder : IValueGeneratorSelectionStage, ITimeSeriesSelec
     {
         if (!_components.Any())
         {
-            //TODO real exception!
-            throw new Exception("Invalid because no elements!");
+            throw new InvalidOperationException($"Cannot build {nameof(TimeSeries)} from the current " +
+                                                "configuration because no components have been added.");
         }
 
         return new TimeSeries(_components, _currentTimeOrigin);

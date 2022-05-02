@@ -10,5 +10,5 @@ public class PeriodicFunctionParams
 
     public TimeSpan PhaseShift { get; set; } = TimeSpan.FromSeconds(0);
 
-    public double VerticalShift { get; set; } = 0.0;
+    public double VerticalShift { get; set; }
 }
