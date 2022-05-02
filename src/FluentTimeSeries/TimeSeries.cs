@@ -56,7 +56,8 @@ public class TimeSeries
 
     public DataPoint[] Block(TimeSpan length, double samplingIntervalSeconds, DateTime? startTimestamp = null)
     {
-        throw new NotImplementedException();
+        var numOfPoints = Math.Max((int)(length.TotalSeconds / samplingIntervalSeconds), 1);
+        return Block(numOfPoints, samplingIntervalSeconds, startTimestamp);
     }
 
     public DataPoint Sample(DateTime? timestamp = null)

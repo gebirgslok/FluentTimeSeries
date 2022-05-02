@@ -6,7 +6,8 @@ namespace FluentTimeSeries.Demo;
 internal static class Program
 {
     private static readonly Example[] _examples = {
-        new(1, "y(t) = sin(t) + cos(t)", Example1.Run),
+        new(1, "s(t) = sin(t) + cos(t)", Example1.Run),
+        new(2, "s(t) = sin(t') + (3 * cos(t') - 2) - sawtooth(2 * t') + noise(t')", Example2.Run),
     };
 
     public static void Main(string[] args)

@@ -1,4 +1,5 @@
 
+
 [![NuGet](https://img.shields.io/nuget/v/FluentTimeSeries?color=blue&logo=NuGet)](https://www.nuget.org/packages/FluentTimeSeries/)
 [![Build Status](https://dev.azure.com/jeisenbach/FluentTimeSeries/_apis/build/status/gebirgslok.FluentTimeSeries?branchName=main)](https://dev.azure.com/jeisenbach/FluentTimeSeries/_build/latest?definitionId=4&branchName=main)
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/jeisenbach/FluentTimeSeries/4?logo=Codecov)
@@ -106,3 +107,52 @@ You can optionally set the time origin of the series that will be utilized when 
 //Creates a new builder with 'Sine' as the base function
 builder = builder.SetTimeOrigin(TimeOrigin.UtcNow);
 ```
+#### From existing time series
+You can configure a new time series based on an existing one. Therefore, use the static factory method `FromTimeSeries` on the `TimeSeriesBuilder` class.
+```csharp
+var s1 = ... //Existing TimeSeries instance
+var s2 = TimeSeriesBuilder
+	.FromTimeSeries(s1)
+	//Aggragete additional functions and apply additionals transformations here, e.g.
+	.Add().Cosine()
+	.Subtract().Sawtooth()
+	.Abs()
+	.Add().UniformRandom()
+	.Build();
+```
+The `FromTimeSeries` accepts a second *optinal* argument - `timeOrigin` - that lets you overwrite the time origin of the base series. 
+
+#### Build
+Once everything is configured, call `Build()` to build the time series instance.
+```csharp
+var series = builder.Build();
+```
+### TimeSeries
+The `TimeSeries` object comes with two methods to generate data: `Sample` and `Block`.
+#### Sample
+Use the `Sample` method to generate a *single* data point (e.g. the 'next' measurement of a sensor).
+A typical use case might be a timer which simulates a sensor and produces a new measurement (e.g. temperature, voltage, power, ...) every fixed interval.
+```csharp
+// Use DateTime.Now (DateTime.UtcNow if the TimeOrigin is TimeOrigin.UtcNow) 
+// as the timestamp ...
+var samplePoint = series.Sample();
+
+//...or provide a timestamp
+var samplePoint = series.Sample(new DateTime(2000, 1, 1, 0, 0, 0);
+```
+#### Block
+Use the `Block` method to generate a block of data points. Use the optional `startTimestamp` argument to specify timestamp of first data point. If not specified the timestamp of the first point will be the time origin of the series.
+```csharp
+// Generates data points every 0.1s for 100s = 1000 data points...
+var dataPoints = series.Block(TimeSpan.FromSeconds(100), 0.1);
+
+//...or specify the #of data points directly
+var dataPoints = series.Block(1000, 0.1);
+```
+
+### Extend the configuration builder
+#### Add custom functions
+tbd
+#### Add custom transformers
+tbd
+
