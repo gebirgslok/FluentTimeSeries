@@ -110,7 +110,7 @@ builder = builder.SetTimeOrigin(TimeOrigin.UtcNow);
 #### From existing time series
 You can configure a new time series based on an existing one. Therefore, use the static factory method `FromTimeSeries` on the `TimeSeriesBuilder` class.
 ```csharp
-var s1 = ... //Existing TimeSeries instance
+var s1 = GetExistingSeries(); //Existing TimeSeries instance
 var s2 = TimeSeriesBuilder
 	.FromTimeSeries(s1)
 	//Aggragete additional functions and apply additionals transformations here, e.g.
